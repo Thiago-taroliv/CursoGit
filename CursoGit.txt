@@ -10,7 +10,7 @@ vi Readme.md -> cria o arquivo Readme.md dentro do repositório
 i -> "INSERT" -> permite a edição do arquivo
 após inserir ou editar o arquivo -> "esc"+":wq" volta ao repositório
 
-extra: para entrar no arquiv basta digitar vim "nome do arquivo"
+extra: para entrar no arquivo basta digitar vim "nome do arquivo"
 
 
 comandos para commit
@@ -19,15 +19,95 @@ git status -> mostra em qual estágio está cada arquivo do repositório
 git add "[nome do arquivo]" -> adiciona o arquivo para o modo staged, onde poderá ser commitado
 git commit -m "Título do commit" -> Faz o commit do que está no staged
 
-extra[cuidado ao usar]: git commit -a -m "faz o commit de todos os arquivos modificadps, mesmo que não estejam adicionados ao staged"
+extra[cuidado ao usar]: "git commit -a -m" ou "git commit -am" -> faz o commit de todos os arquivos modificados, mesmo que não estejam adicionados ao staged
 
-visalizando logs
+
+
+visualizando logs
 
 git log -> exibe o título, a hash, o autor de cada hash e a data de todos commits daquele repositório
-gt log --decorate -> mostra se foi d uma branch pra outr, se teve um merge, que tags foram geradas
+gt log --decorate -> mostra se foi de uma branch pra outra, se teve um merge, que tags foram geradas
 git log --author="nome do autor" -> mostra todos os commits de determinado autor
 git shortlog -> exibe quais os autores, quantos commits fizeram e quais eles foram
 git shortlog -sn -> exibe somente a quantidade de commits efetuados e nome de cada autor
 git log --graph -> mostra os commits organizados de forma gráfica de acordo com a branch em que foi commitado
 
 pela hash de cada commit é possível detalhar o que foi modificado em determinado commit da seguinte maneira: git show "hash do commit"
+
+git diff
+
+git diff -> exibe quais mudanças foram feitas em relação ao último commit (IMPORTANTE PARA REVISAR ANTES DE COMMITAR)
+git diff --name-only -> exibe apenas o nome o que foi modificado
+
+desfazendo coisas
+
+git checkout "nome do arquivo"-> desfaz as mudanças feitas anteriormente, como se fosse um CTRL+Z (se o arquivo já foi adicionado ao stage, não funciona esse comando)
+git reset HEAD "nome do arquivo" ou git restore --stage "nome do arquivo"-> retira determinado arquivo do stage (após isso o comando de checkout funcionará normalmente)
+
+git reset --soft "hash do commit anterior ao desejado" -> mata o último commit e volta o arquivo para stage
+git reset --mixed "hash do commit anterior ao desejado" -> mata o commit, volta os arquivos para antes do stage, modified 
+git reset --hard "hash do commit anterior ao desejado" -> mata o commit, retorna tudo do último commit
+
+Jogando o repositório no GitHub
+
+criar o repositório dentro do github
+git remote add origin https://github.com/Thiago-taroliv/CursoGit.git -> linha de comando no terminal, adicionando o link do repositório remoto, origin = nome default + endereço
+git branch -M main -> nomeia o repositório como main
+git push -u origin main -> envia os arquivos para o repositório que estamos determinando (MAIN -> ORIGIN)
+
+
+clonando um projeto
+
+git clone "link do repositório" "nome do clone" -> clona o repositório do GitHub
+ex: 
+ git clone https://github.com/Thiago-taroliv/CursoGit.git github-course-clone
+
+fork
+
+fork é uma cópia de algum repositório do GitHub para dentro do seu próprio Github, para fazê-lo é bem simples, basta entrar no repositório desejado, clicar em fork, preencher o nome e descrção e concluir.
+
+branch
+
+o que é?
+ponteiro móvel que leva a um commit
+
+vantagens:
+modificar sem alterar a main
+facilmente "desligável"
+múltiplas pessoas trabalhando
+evita conflitos - como só eu estarei mexendo na branch evita que meu commit conflite com o commit de outro colaborador
+
+criar e deletar branch:
+git checkout -b "nome da nova branch" -> cria e já entra na nova branch
+git branch -> lista as branchs do repositório
+git checkout "nome da branch" -> alterna entre uma branch e outra
+git branch -D "nome da branch" -> deleta a branch desejada
+
+unir branchs - merge:
+
+ao criar uma ramificação um commit aponta para 2 commits anteriores. Cria-se um commit extra juntando o branch separado com os do branch que eu estou juntando
+
+Pró: não destrutivo - não destrói nenhum commit nem mexer no histórico
+Contra: cria um commit a mais, somente para juntar os arquivos de branchs diferentes, sem adicionar nenhum arquivo, poluindo o histórico do repositório
+
+git merge "nome da branch para untar à branch atual" -> puxa a branch para a atual pelo método merge
+
+unir branchs - rebase:
+
+rebase é um pouco mais simples que o merge
+
+Pega o commit da branch de "teste" e move ele para frente de onde estiver jogando, pode ser o master e deixando tudo linear, matando o commit anterior da branch "teste"
+
+Pró: evita commits extras somente para unir branchs
+Contra: perde-se a ordem cronológica dos commits, podendo causar conflito nos próximos commits
+
+git rebase "nome da brach" -> puxa a branch para a atual pelo método rebase
+
+
+
+
+
+
+
+
+
