@@ -10,9 +10,24 @@ vi Readme.md -> cria o arquivo Readme.md dentro do repositório
 i -> "INSERT" -> permite a edição do arquivo
 após inserir ou editar o arquivo -> "esc"+":wq" volta ao repositório
 
+extra: para entrar no arquiv basta digitar vim "nome do arquivo"
+
 
 comandos para commit
 
 git status -> mostra em qual estágio está cada arquivo do repositório
 git add "[nome do arquivo]" -> adiciona o arquivo para o modo staged, onde poderá ser commitado
 git commit -m "Título do commit" -> Faz o commit do que está no staged
+
+extra[cuidado ao usar]: git commit -a -m "faz o commit de todos os arquivos modificadps, mesmo que não estejam adicionados ao staged"
+
+visalizando logs
+
+git log -> exibe o título, a hash, o autor de cada hash e a data de todos commits daquele repositório
+gt log --decorate -> mostra se foi d uma branch pra outr, se teve um merge, que tags foram geradas
+git log --author="nome do autor" -> mostra todos os commits de determinado autor
+git shortlog -> exibe quais os autores, quantos commits fizeram e quais eles foram
+git shortlog -sn -> exibe somente a quantidade de commits efetuados e nome de cada autor
+git log --graph -> mostra os commits organizados de forma gráfica de acordo com a branch em que foi commitado
+
+pela hash de cada commit é possível detalhar o que foi modificado em determinado commit da seguinte maneira: git show "hash do commit"
