@@ -1,0 +1,18 @@
+ciclo de vida de um status de arquivo
+
+untracked -> unmodified -> modified -> staged -> unmodified ...
+
+Criado e editando um repositório:
+
+Abrir o git bash dentro da pasta desejada do repositório
+git init -> inicia o repositório
+vi Readme.md -> cria o arquivo Readme.md dentro do repositório
+i -> "INSERT" -> permite a edição do arquivo
+após inserir ou editar o arquivo -> "esc"+":wq" volta ao repositório
+
+
+comandos para commit
+
+git status -> mostra em qual estágio está cada arquivo do repositório
+git add "[nome do arquivo]" -> adiciona o arquivo para o modo staged, onde poderá ser commitado
+git commit -m "Título do commit" -> Faz o commit do que está no staged
